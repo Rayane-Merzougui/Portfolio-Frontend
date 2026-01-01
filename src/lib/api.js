@@ -2,9 +2,10 @@ import axios from "axios";
 
 const getBaseURL = () => {
   if (import.meta.env.PROD) {
-    return "https://portfolio-backend-byfd.onrender.com/api.php";
+    return "https://portfolio-backend-byfd.onrender.com";
+  } else {
+    return import.meta.env.VITE_API_URL || "http://localhost:8000";
   }
-  return import.meta.env.VITE_API_URL || "http://localhost:8000/api.php";
 };
 
 const api = axios.create({
@@ -12,16 +13,38 @@ const api = axios.create({
   withCredentials: true,
   headers: {
     "Content-Type": "application/json",
-    Accept: "application/json",
   },
 });
+
+api.interceptors.request.use(
+  (config) => {
+    if (!import.meta.env.PROD) {
+      console.log(
+        `API Request: ${config.method?.toUpperCase()} ${config.baseURL}${
+          config.url
+        }`
+      );
+    }
+    return config;
+  },
+  (error) => {
+    return Promise.reject(error);
+  }
+);
 
 api.interceptors.response.use(
   (response) => response,
   (error) => {
-    console.error("API Error:", error.response?.data || error.message);
+    console.error("API Error:", {
+      status: error.response?.status,
+      data: error.response?.data,
+      url: error.config?.url,
+    });
 
-    if (error.response?.status === 401) {
+    if (
+      error.response?.status === 401 &&
+      window.location.pathname !== "/login"
+    ) {
       window.location.href = "/login";
     }
 
