@@ -16,8 +16,16 @@ const api = axios.create({
   },
 });
 
+// Intercepteur pour préfixer automatiquement les endpoints en production
 api.interceptors.request.use(
   (config) => {
+    // En production, ajouter /api.php devant l'URL sauf si elle commence déjà par /api.php
+    if (import.meta.env.PROD && !config.url.startsWith("/api.php")) {
+      config.url =
+        "/api.php" +
+        (config.url.startsWith("/") ? config.url : "/" + config.url);
+    }
+
     if (!import.meta.env.PROD) {
       console.log(
         `API Request: ${config.method?.toUpperCase()} ${config.baseURL}${
