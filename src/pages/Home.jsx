@@ -14,7 +14,6 @@ export default function Home() {
       try {
         setLoading(true);
         setError(null);
-        console.log("Fetching articles for page:", page);
 
         const response = await api.get("/articles", {
           params: {
@@ -23,16 +22,10 @@ export default function Home() {
           },
         });
 
-        console.log("API Response:", response);
-        console.log("Response data:", response.data);
-
-        // S'assurer que nous avons toujours un tableau pour items
+        // Vérifier la structure de la réponse
         const itemsData = response.data?.items || response.data || [];
         const totalPagesData =
           response.data?.totalPages || response.data?.total_pages || 1;
-
-        console.log("Items to display:", itemsData);
-        console.log("Total pages:", totalPagesData);
 
         setItems(Array.isArray(itemsData) ? itemsData : []);
         setTotalPages(Math.max(1, parseInt(totalPagesData) || 1));
@@ -41,7 +34,7 @@ export default function Home() {
         setError(
           err.response?.data?.error || "Erreur de chargement des articles"
         );
-        setItems([]); // Réinitialiser à un tableau vide en cas d'erreur
+        setItems([]);
       } finally {
         setLoading(false);
       }
@@ -64,29 +57,53 @@ export default function Home() {
 
   if (loading) {
     return (
-      <div className="home">
+      <div className="container">
         <h1>Articles</h1>
-        <div className="loading">Chargement des articles...</div>
+        <div
+          style={{
+            textAlign: "center",
+            padding: "3rem",
+            color: "var(--muted)",
+          }}
+        >
+          Chargement des articles...
+        </div>
       </div>
     );
   }
 
   if (error) {
     return (
-      <div className="home">
+      <div className="container">
         <h1>Articles</h1>
-        <div className="error">{error}</div>
-        <button onClick={() => window.location.reload()}>Réessayer</button>
+        <div className="error" style={{ textAlign: "center" }}>
+          {error}
+        </div>
+        <div style={{ textAlign: "center", marginTop: "1rem" }}>
+          <button
+            className="btn"
+            onClick={() => window.location.reload()}
+            style={{ margin: "0 auto" }}
+          >
+            Réessayer
+          </button>
+        </div>
       </div>
     );
   }
 
   return (
-    <div className="home">
+    <div className="container">
       <h1>Articles</h1>
 
       {items.length === 0 ? (
-        <div className="no-articles">
+        <div
+          style={{
+            textAlign: "center",
+            padding: "3rem",
+            color: "var(--muted)",
+          }}
+        >
           <p>Aucun article disponible pour le moment.</p>
         </div>
       ) : (
