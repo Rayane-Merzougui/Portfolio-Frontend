@@ -15,6 +15,8 @@ export default function Home() {
         setLoading(true);
         setError(null);
 
+        console.log("Fetching articles, page:", page);
+
         const response = await api.get("/articles", {
           params: {
             page,
@@ -22,19 +24,42 @@ export default function Home() {
           },
         });
 
+        console.log("API response:", response);
+        console.log("Response data:", response.data);
+
         // Vérifier la structure de la réponse
         const itemsData = response.data?.items || response.data || [];
-        const totalPagesData =
-          response.data?.totalPages || response.data?.total_pages || 1;
+        let totalPagesData = 1; // Par défaut 1 page
+
+        // Essayer différentes clés pour le nombre total de pages
+        if (response.data?.totalPages !== undefined) {
+          totalPagesData = response.data.totalPages;
+        } else if (response.data?.total_pages !== undefined) {
+          totalPagesData = response.data.total_pages;
+        } else if (response.data?.pagination?.totalPages !== undefined) {
+          totalPagesData = response.data.pagination.totalPages;
+        }
+
+        console.log("Items to display:", itemsData);
+        console.log("Total pages from response:", totalPagesData);
 
         setItems(Array.isArray(itemsData) ? itemsData : []);
         setTotalPages(Math.max(1, parseInt(totalPagesData) || 1));
+
+        // Debug: vérifier l'état
+        console.log(
+          "State after update - items:",
+          itemsData.length,
+          "totalPages:",
+          totalPagesData
+        );
       } catch (err) {
         console.error("Error fetching articles:", err);
         setError(
           err.response?.data?.error || "Erreur de chargement des articles"
         );
         setItems([]);
+        setTotalPages(1); // Toujours au moins 1 page
       } finally {
         setLoading(false);
       }
@@ -88,48 +113,47 @@ export default function Home() {
           <p>Aucun article disponible pour le moment.</p>
         </div>
       ) : (
-        <>
-          <ul className="articles">
-            {items.map((a) => (
-              <li key={a.id || a._id} className="article">
-                <div className="meta">
-                  <img
-                    className="mini-avatar"
-                    src={getAvatarUrl(a.avatar_url)}
-                    alt={`Avatar de ${a.author_name || "Anonyme"}`}
-                  />
-                  <span className="author">{a.author_name || "Anonyme"}</span>
-                  <span className="date">
-                    {a.created_at
-                      ? new Date(a.created_at).toLocaleDateString("fr-FR")
-                      : "Date inconnue"}
-                  </span>
-                </div>
-                <h3>{a.title || "Sans titre"}</h3>
-                <p>{a.body || "Aucun contenu"}</p>
-              </li>
-            ))}
-          </ul>
-
-          <div className="pagination">
-            <button
-              disabled={page <= 1}
-              onClick={() => setPage((p) => Math.max(1, p - 1))}
-            >
-              Précédent
-            </button>
-            <span>
-              Page {page} / {totalPages}
-            </span>
-            <button
-              disabled={page >= totalPages}
-              onClick={() => setPage((p) => Math.min(totalPages, p + 1))}
-            >
-              Suivant
-            </button>
-          </div>
-        </>
+        <ul className="articles">
+          {items.map((a) => (
+            <li key={a.id || a._id} className="article">
+              <div className="meta">
+                <img
+                  className="mini-avatar"
+                  src={getAvatarUrl(a.avatar_url)}
+                  alt={`Avatar de ${a.author_name || "Anonyme"}`}
+                />
+                <span className="author">{a.author_name || "Anonyme"}</span>
+                <span className="date">
+                  {a.created_at
+                    ? new Date(a.created_at).toLocaleDateString("fr-FR")
+                    : "Date inconnue"}
+                </span>
+              </div>
+              <h3>{a.title || "Sans titre"}</h3>
+              <p>{a.body || "Aucun contenu"}</p>
+            </li>
+          ))}
+        </ul>
       )}
+
+      {/* Pagination TOUJOURS affichée, même sans articles */}
+      <div className="pagination">
+        <button
+          disabled={page <= 1}
+          onClick={() => setPage((p) => Math.max(1, p - 1))}
+        >
+          Précédent
+        </button>
+        <span>
+          Page {page} / {totalPages}
+        </span>
+        <button
+          disabled={page >= totalPages}
+          onClick={() => setPage((p) => Math.min(totalPages, p + 1))}
+        >
+          Suivant
+        </button>
+      </div>
     </div>
   );
 }
