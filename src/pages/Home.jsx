@@ -59,15 +59,7 @@ export default function Home() {
     return (
       <div className="container">
         <h1>Articles</h1>
-        <div
-          style={{
-            textAlign: "center",
-            padding: "3rem",
-            color: "var(--muted)",
-          }}
-        >
-          Chargement des articles...
-        </div>
+        <div className="loading-state">Chargement des articles...</div>
       </div>
     );
   }
@@ -76,18 +68,13 @@ export default function Home() {
     return (
       <div className="container">
         <h1>Articles</h1>
-        <div className="error" style={{ textAlign: "center" }}>
-          {error}
-        </div>
-        <div style={{ textAlign: "center", marginTop: "1rem" }}>
-          <button
-            className="btn"
-            onClick={() => window.location.reload()}
-            style={{ margin: "0 auto" }}
-          >
-            Réessayer
-          </button>
-        </div>
+        <div className="error-message">{error}</div>
+        <button
+          className="retry-button"
+          onClick={() => window.location.reload()}
+        >
+          Réessayer
+        </button>
       </div>
     );
   }
@@ -97,13 +84,7 @@ export default function Home() {
       <h1>Articles</h1>
 
       {items.length === 0 ? (
-        <div
-          style={{
-            textAlign: "center",
-            padding: "3rem",
-            color: "var(--muted)",
-          }}
-        >
+        <div className="no-articles">
           <p>Aucun article disponible pour le moment.</p>
         </div>
       ) : (
