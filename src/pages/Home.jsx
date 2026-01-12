@@ -69,15 +69,29 @@ export default function Home() {
   }, [page]);
 
   const getAvatarUrl = (avatarUrl) => {
-    if (!avatarUrl) return "https://via.placeholder.com/24";
-
-    // En production, utilisez l'URL du backend Render
-    if (import.meta.env.PROD) {
-      return `https://portfolio-backend-byfd.onrender.com${avatarUrl}`;
+    if (!avatarUrl || avatarUrl === "") {
+      return "https://via.placeholder.com/24";
     }
 
-    // En développement, utilisez l'URL locale
-    return `http://localhost:8000${avatarUrl}`;
+    // Si c'est déjà une URL complète (base64)
+    if (avatarUrl.startsWith("data:image/")) {
+      return avatarUrl;
+    }
+
+    // Si c'est une URL relative
+    if (avatarUrl.startsWith("/")) {
+      // En production, utilisez l'URL du backend Render
+      if (import.meta.env.PROD) {
+        return `https://portfolio-backend-byfd.onrender.com${avatarUrl}`;
+      }
+
+      // En développement
+      const baseURL = import.meta.env.VITE_API_URL || "http://localhost:8000";
+      return `${baseURL}${avatarUrl}`;
+    }
+
+    // Si c'est déjà une URL complète
+    return avatarUrl;
   };
 
   if (loading) {
@@ -121,6 +135,10 @@ export default function Home() {
                   className="mini-avatar"
                   src={getAvatarUrl(a.avatar_url)}
                   alt={`Avatar de ${a.author_name || "Anonyme"}`}
+                  onError={(e) => {
+                    e.target.onerror = null;
+                    e.target.src = "https://via.placeholder.com/24";
+                  }}
                 />
                 <span className="author">{a.author_name || "Anonyme"}</span>
                 <span className="date">
