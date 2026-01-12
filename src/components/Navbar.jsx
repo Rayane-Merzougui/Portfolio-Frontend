@@ -17,7 +17,7 @@ export default function Navbar() {
     <nav className="navbar">
       <div className="nav-left">
         <Link to="/" className="brand">
-          Mon Portfolio
+          RM Portfolio
         </Link>
       </div>
 
