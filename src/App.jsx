@@ -5,6 +5,7 @@ import Home from "./pages/Home.jsx";
 import Login from "./pages/Login.jsx";
 import Register from "./pages/Register.jsx";
 import NewArticle from "./pages/NewArticle.jsx";
+import About from "./pages/About.jsx";
 
 function PrivateRoute({ children }) {
   const { user, loading } = useAuth();
@@ -18,9 +19,11 @@ export default function App() {
       <Navbar />
       <div className="container">
         <Routes>
-          <Route path="/" element={<Home />} />
+          <Route path="/" element={<About />} />
+          <Route path="/articles" element={<Home />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
+          <Route path="/about" element={<About />} />
           <Route
             path="/new"
             element={

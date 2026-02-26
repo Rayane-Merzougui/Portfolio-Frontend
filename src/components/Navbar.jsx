@@ -19,6 +19,9 @@ export default function Navbar() {
         <Link to="/" className="brand">
           RM Portfolio
         </Link>
+        <Link to="/articles" className="link">
+          Articles
+        </Link>
       </div>
 
       <button
@@ -37,6 +40,9 @@ export default function Navbar() {
       </button>
 
       <div className={`nav-right ${isMenuOpen ? "mobile-open" : ""}`}>
+        <Link to="/articles" onClick={() => setIsMenuOpen(false)}>
+          Articles
+        </Link>
         {!user ? (
           <>
             <Link to="/login" onClick={() => setIsMenuOpen(false)}>
