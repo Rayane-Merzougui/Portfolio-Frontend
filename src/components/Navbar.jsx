@@ -19,9 +19,6 @@ export default function Navbar() {
         <Link to="/" className="brand">
           RM Portfolio
         </Link>
-        <Link to="/articles" className="link">
-          Articles
-        </Link>
       </div>
 
       <button
