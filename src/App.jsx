@@ -1,5 +1,6 @@
 import { Routes, Route, Navigate } from "react-router-dom";
 import { AuthProvider, useAuth } from "./context/AuthContext.jsx";
+import { LanguageProvider } from "./context/LanguageContext";
 import Navbar from "./components/Navbar.jsx";
 import Home from "./pages/Home.jsx";
 import Login from "./pages/Login.jsx";
@@ -15,25 +16,27 @@ function PrivateRoute({ children }) {
 
 export default function App() {
   return (
-    <AuthProvider>
-      <Navbar />
-      <div className="container">
-        <Routes>
-          <Route path="/" element={<About />} />
-          <Route path="/articles" element={<Home />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Register />} />
-          <Route path="/about" element={<About />} />
-          <Route
-            path="/new"
-            element={
-              <PrivateRoute>
-                <NewArticle />
-              </PrivateRoute>
-            }
-          />
-        </Routes>
-      </div>
-    </AuthProvider>
+    <LanguageProvider>
+      <AuthProvider>
+        <Navbar />
+        <div className="container">
+          <Routes>
+            <Route path="/" element={<About />} />
+            <Route path="/articles" element={<Home />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register />} />
+            <Route path="/about" element={<About />} />
+            <Route
+              path="/new"
+              element={
+                <PrivateRoute>
+                  <NewArticle />
+                </PrivateRoute>
+              }
+            />
+          </Routes>
+        </div>
+      </AuthProvider>
+    </LanguageProvider>
   );
 }

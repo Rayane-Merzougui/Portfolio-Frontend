@@ -1,22 +1,23 @@
 import { useState } from "react";
 import api from "../lib/api.js";
 import { useAuth } from "../context/AuthContext.jsx";
+import { useLanguage } from "../context/LanguageContext";
 
 export default function NewArticle() {
   const [title, setTitle] = useState("");
   const [body, setBody] = useState("");
   const [msg, setMsg] = useState("");
-  const { user } = useAuth(); // ← Récupérez l'utilisateur
+  const { user } = useAuth();
+  const { t } = useLanguage();
 
   const onSubmit = async (e) => {
     e.preventDefault();
     setMsg("");
 
-    // Debug: vérifiez l'état de l'utilisateur
     console.log("User auth state:", user);
 
     if (!user) {
-      setMsg("Erreur: Vous n'êtes pas connecté");
+      setMsg(t("newArticle.notLoggedIn"));
       return;
     }
 
@@ -27,33 +28,37 @@ export default function NewArticle() {
 
       setTitle("");
       setBody("");
-      setMsg("Article publié !");
+      setMsg(t("newArticle.success"));
     } catch (e) {
       console.error("Article creation error:", e);
-      setMsg(e.response?.data?.error || "Erreur");
+      setMsg(e.response?.data?.error || t("newArticle.error"));
     }
   };
 
   return (
     <form className="card" onSubmit={onSubmit}>
-      <h2>Nouvel article</h2>
+      <h2>{t("newArticle.title")}</h2>
       {user && (
-        <div style={{ color: "green" }}>Connecté en tant que: {user.name}</div>
+        <div style={{ color: "green" }}>
+          {t("newArticle.loggedInAs", { name: user.name })}
+        </div>
       )}
-      {!user && <div style={{ color: "red" }}>Non connecté</div>}
+      {!user && (
+        <div style={{ color: "red" }}>{t("newArticle.notLoggedInStatus")}</div>
+      )}
       {msg && <div className="info">{msg}</div>}
       <input
-        placeholder="Titre"
+        placeholder={t("newArticle.titlePlaceholder")}
         value={title}
         onChange={(e) => setTitle(e.target.value)}
       />
       <textarea
-        placeholder="Contenu"
+        placeholder={t("newArticle.bodyPlaceholder")}
         value={body}
         onChange={(e) => setBody(e.target.value)}
         rows={8}
       />
-      <button className="btn">Publier</button>
+      <button className="btn">{t("newArticle.button")}</button>
     </form>
   );
 }

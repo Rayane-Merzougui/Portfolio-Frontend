@@ -1,9 +1,11 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext.jsx";
+import { useLanguage } from "../context/LanguageContext";
 
 export default function Register() {
   const { register } = useAuth();
+  const { t } = useLanguage();
   const nav = useNavigate();
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -17,31 +19,31 @@ export default function Register() {
       await register(name, email, password);
       nav("/");
     } catch (e) {
-      setErr(e.response?.data?.error || "Erreur");
+      setErr(e.response?.data?.error || t("register.error"));
     }
   };
 
   return (
     <form className="card" onSubmit={onSubmit}>
-      <h2>Inscription</h2>
+      <h2>{t("register.title")}</h2>
       {err && <div className="error">{err}</div>}
       <input
-        placeholder="Nom"
+        placeholder={t("register.name")}
         value={name}
         onChange={(e) => setName(e.target.value)}
       />
       <input
-        placeholder="Email"
+        placeholder={t("register.email")}
         value={email}
         onChange={(e) => setEmail(e.target.value)}
       />
       <input
-        placeholder="Mot de passe"
+        placeholder={t("register.password")}
         type="password"
         value={password}
         onChange={(e) => setPassword(e.target.value)}
       />
-      <button className="btn">Créer un compte</button>
+      <button className="btn">{t("register.button")}</button>
     </form>
   );
 }

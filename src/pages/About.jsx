@@ -4,112 +4,68 @@ import githubIcon from "../assets/icon/Github.png";
 import linkedinIcon from "../assets/icon/linkedin.png";
 import instagramIcon from "../assets/icon/Instagram.png";
 import emailIcon from "../assets/icon/Email.png";
+import { useLanguage } from "../context/LanguageContext";
 
 export default function About() {
+  const { t } = useLanguage();
+
   return (
     <div className="container about-page">
-      <h1>Bienvenue sur mon portfolio de développeur web</h1>
+      <h1>{t("about.welcome")}</h1>
 
-      <p className="intro">
-        Bonjour et bienvenue sur mon portfolio numérique !
-        <br />
-        Je suis <strong>Rayane Merzougui</strong>, développeur web passionné par
-        la création d'applications web complètes et performantes. Ce site que
-        vous visitez actuellement représente le fruit de mon travail et met en
-        avant mes compétences techniques.
-      </p>
+      <p
+        className="intro"
+        dangerouslySetInnerHTML={{ __html: t("about.intro") }}
+      />
 
       <section>
-        <h2>1/- À propos de ce projet</h2>
-        <p>
-          Ce portfolio est une application web complète que j'ai développée de A
-          à Z, en mettant en pratique l'ensemble de mes compétences :
-        </p>
+        <h2>{t("about.projectTitle")}</h2>
+        <p>{t("about.projectDesc")}</p>
       </section>
 
       <section>
-        <h2>2/- Architecture technique</h2>
+        <h2>{t("about.techTitle")}</h2>
         <ul>
-          <li>
-            <strong>Frontend :</strong> Développé avec React.js et Vite pour une
-            expérience utilisateur moderne et réactive.
-          </li>
-          <li>
-            <strong>Backend :</strong> API RESTful construite en PHP pur, sans
-            framework, pour un contrôle total.
-          </li>
-          <li>
-            <strong>Base de données :</strong> SQLite pour une gestion des
-            données momentanée.
-          </li>
-          <li>
-            <strong>Authentification :</strong> Système complet d'inscription et
-            de connexion avec gestion de sessions.
-          </li>
-          <li>
-            <strong>Fonctionnalités :</strong> Publication d'articles, gestion
-            de profil avec photo, interface administrateur.
-          </li>
+          <li dangerouslySetInnerHTML={{ __html: t("about.tech.frontend") }} />
+          <li dangerouslySetInnerHTML={{ __html: t("about.tech.backend") }} />
+          <li dangerouslySetInnerHTML={{ __html: t("about.tech.database") }} />
+          <li dangerouslySetInnerHTML={{ __html: t("about.tech.auth") }} />
+          <li dangerouslySetInnerHTML={{ __html: t("about.tech.features") }} />
         </ul>
       </section>
 
       <section>
-        <h2>3/- Mes compétences techniques</h2>
+        <h2>{t("about.skillsTitle")}</h2>
         <ul>
-          <li>
-            <strong>HTML5 :</strong> Sémantique, accessibilité et structure
-            optimisée.
-          </li>
-          <li>
-            <strong>CSS3 :</strong> Responsive design, animations, et frameworks
-            modernes.
-          </li>
-          <li>
-            <strong>JavaScript (ES6+) :</strong> Programmation fonctionnelle,
-            asynchrone et manipulation du DOM.
-          </li>
-          <li>
-            <strong>React.js :</strong> Composants réutilisables, gestion d'état
-            (Hooks, Context), routing.
-          </li>
-          <li>
-            <strong>PHP :</strong> Développement backend orienté objet,
-            sécurité, API REST.
-          </li>
-          <li>
-            <strong>MySQL :</strong> Modélisation de bases de données, requêtes
-            complexes, optimisation.
-          </li>
+          <li dangerouslySetInnerHTML={{ __html: t("about.skills.html") }} />
+          <li dangerouslySetInnerHTML={{ __html: t("about.skills.css") }} />
+          <li dangerouslySetInnerHTML={{ __html: t("about.skills.js") }} />
+          <li dangerouslySetInnerHTML={{ __html: t("about.skills.react") }} />
+          <li dangerouslySetInnerHTML={{ __html: t("about.skills.php") }} />
+          <li dangerouslySetInnerHTML={{ __html: t("about.skills.mysql") }} />
         </ul>
       </section>
 
       <section>
-        <h2>4/- Méthodologie</h2>
+        <h2>{t("about.methodologyTitle")}</h2>
         <ul>
-          <li>Développement full-stack (frontend + backend)</li>
-          <li>Conception d'architectures logicielles modulaires</li>
-          <li>Intégration de systèmes d'authentification sécurisés</li>
-          <li>Création d'interfaces utilisateur intuitives et responsives</li>
-          <li>Optimisation des performances et du référencement</li>
+          <li>{t("about.methodology.fullstack")}</li>
+          <li>{t("about.methodology.architecture")}</li>
+          <li>{t("about.methodology.auth")}</li>
+          <li>{t("about.methodology.ui")}</li>
+          <li>{t("about.methodology.performance")}</li>
         </ul>
       </section>
 
       <section>
-        <h2>5/- Philosophie de développement</h2>
-        <p>
-          Je crois en un code propre, bien documenté et maintenable. Chaque
-          projet est pour moi l'occasion d'appliquer les meilleures pratiques de
-          développement, de la conception à la mise en production.
-        </p>
-        <p>
-          Ce portfolio n'est pas seulement une vitrine de mes compétences, mais
-          aussi une plateforme vivante qui évoluera avec mes nouveaux projets et
-          apprentissages.
-        </p>
-        <p className="thanks">Merci d'avoir visité mon site !</p>
+        <h2>{t("about.philosophyTitle")}</h2>
+        <p>{t("about.philosophy.desc1")}</p>
+        <p>{t("about.philosophy.desc2")}</p>
+        <p className="thanks">{t("about.philosophy.thanks")}</p>
       </section>
+
       <section>
-        <h2>6/- Me Contacter</h2>
+        <h2>{t("about.contactTitle")}</h2>
         <div className="contact-icons">
           <a
             href="https://www.facebook.com/rayane.chahine.33?locale=fr_FR"
@@ -137,7 +93,7 @@ export default function About() {
             target="_blank"
             rel="noopener noreferrer"
           >
-            <img src={instagramIcon} alt="Instagrame" />
+            <img src={instagramIcon} alt="Instagram" />
           </a>
           <a
             href="mailto:rayane.merzougui.work@gmail.com"

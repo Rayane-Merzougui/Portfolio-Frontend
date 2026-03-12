@@ -1,9 +1,11 @@
 import { Link } from "react-router-dom";
 import { useAuth } from "../context/AuthContext.jsx";
+import { useLanguage } from "../context/LanguageContext.jsx";
 import { useRef, useState } from "react";
 
 export default function Navbar() {
   const { user, logout, uploadAvatar } = useAuth();
+  const { t, toggleLanguage, language } = useLanguage();
   const fileRef = useRef();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
@@ -17,7 +19,7 @@ export default function Navbar() {
     <nav className="navbar">
       <div className="nav-left">
         <Link to="/" className="brand">
-          RM Portfolio
+          {t("nav.brand")}
         </Link>
       </div>
 
@@ -38,19 +40,33 @@ export default function Navbar() {
 
       <div className={`nav-right ${isMenuOpen ? "mobile-open" : ""}`}>
         <Link to="/articles" onClick={() => setIsMenuOpen(false)}>
-          Articles
+          {t("nav.articles")}
         </Link>
+
+        {/* Language toggle button */}
+        <button
+          onClick={() => {
+            toggleLanguage();
+            // Optionally close mobile menu
+            setIsMenuOpen(false);
+          }}
+          className="link language-toggle"
+          style={{ fontWeight: "bold", minWidth: "40px" }}
+        >
+          {t("language.toggle")}
+        </button>
+
         {!user ? (
           <>
             <Link to="/login" onClick={() => setIsMenuOpen(false)}>
-              Connexion
+              {t("nav.login")}
             </Link>
             <Link
               to="/register"
               className="btn"
               onClick={() => setIsMenuOpen(false)}
             >
-              Inscription
+              {t("nav.register")}
             </Link>
           </>
         ) : (
@@ -78,7 +94,7 @@ export default function Navbar() {
               className="btn"
               onClick={() => setIsMenuOpen(false)}
             >
-              Nouvel article
+              {t("nav.newArticle")}
             </Link>
             <button
               onClick={() => {
@@ -87,7 +103,7 @@ export default function Navbar() {
               }}
               className="link"
             >
-              Déconnexion
+              {t("nav.logout")}
             </button>
           </div>
         )}
