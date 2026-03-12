@@ -103,6 +103,46 @@ export default function About() {
         </p>
         <p className="thanks">Merci d'avoir visité mon site !</p>
       </section>
+      <section>
+        <h2>6/- Me Contacter</h2>
+        <div className="contact-icons">
+          <a
+            href="https://www.facebook.com/rayane.chahine.33?locale=fr_FR"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <img src="./src/assets/icon/Facebook.png" alt="Facebook" />
+          </a>
+          <a
+            href="https://github.com/Rayane-Merzougui"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <img src="./src/assets/icon/Github.png" alt="GitHub" />
+          </a>
+          <a
+            href="https://www.linkedin.com/in/rayane-merzougui-a54028343/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <img src="./src/assets/icon/Linkedin.png" alt="LinkedIn" />
+          </a>
+          <a
+            href="https://www.instagram.com/rayane.merzougui97/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <img src="./src/assets/icon/Instagrame.png" alt="Instagrame" />
+          </a>
+          <a
+            href="mailto:rayane.merzougui.work@gmail.com"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <img src="./src/assets/icon/Email.png" alt="Email" />
+          </a>
+        </div>
+      </section>
     </div>
   );
 }

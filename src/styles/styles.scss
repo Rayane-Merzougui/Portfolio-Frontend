@@ -437,4 +437,31 @@ a {
     text-align: center;
     margin-top: 2rem;
   }
+  .contact-icons {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 20px;
+
+    a {
+      display: inline-block;
+      width: 50px;
+      height: 50px;
+      background: #2a2d3a; // couleur de fond temporaire
+      border-radius: 50%;
+      overflow: hidden;
+      transition: transform 0.2s;
+
+      &:hover {
+        transform: scale(1.1);
+      }
+
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+    }
+  }
 }
