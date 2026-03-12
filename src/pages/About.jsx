@@ -1,7 +1,7 @@
 import React from "react";
 import facebookIcon from "../assets/icon/Facebook.png";
 import githubIcon from "../assets/icon/Github.png";
-import linkedinIcon from "../assets/icon/Linkedin.png";
+import linkedinIcon from "../assets/icon/linkedin.png";
 import instagramIcon from "../assets/icon/Instagram.png";
 import emailIcon from "../assets/icon/Email.png";
 
