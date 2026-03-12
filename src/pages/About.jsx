@@ -1,4 +1,9 @@
 import React from "react";
+import facebookIcon from "../assets/icon/Facebook.png";
+import githubIcon from "../assets/icon/Github.png";
+import linkedinIcon from "../assets/icon/Linkedin.png";
+import instagramIcon from "../assets/icon/Instagram.png";
+import emailIcon from "../assets/icon/Email.png";
 
 export default function About() {
   return (
@@ -111,35 +116,35 @@ export default function About() {
             target="_blank"
             rel="noopener noreferrer"
           >
-            <img src="./src/assets/icon/Facebook.png" alt="Facebook" />
+            <img src={facebookIcon} alt="Facebook" />
           </a>
           <a
             href="https://github.com/Rayane-Merzougui"
             target="_blank"
             rel="noopener noreferrer"
           >
-            <img src="./src/assets/icon/Github.png" alt="GitHub" />
+            <img src={githubIcon} alt="GitHub" />
           </a>
           <a
             href="https://www.linkedin.com/in/rayane-merzougui-a54028343/"
             target="_blank"
             rel="noopener noreferrer"
           >
-            <img src="./src/assets/icon/Linkedin.png" alt="LinkedIn" />
+            <img src={linkedinIcon} alt="LinkedIn" />
           </a>
           <a
             href="https://www.instagram.com/rayane.merzougui97/"
             target="_blank"
             rel="noopener noreferrer"
           >
-            <img src="./src/assets/icon/Instagrame.png" alt="Instagrame" />
+            <img src={instagramIcon} alt="Instagrame" />
           </a>
           <a
             href="mailto:rayane.merzougui.work@gmail.com"
             target="_blank"
             rel="noopener noreferrer"
           >
-            <img src="./src/assets/icon/Email.png" alt="Email" />
+            <img src={emailIcon} alt="Email" />
           </a>
         </div>
       </section>
