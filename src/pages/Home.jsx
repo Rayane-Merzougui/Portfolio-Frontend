@@ -11,10 +11,70 @@ export default function Home() {
   const [error, setError] = useState(null);
   const perPage = 10;
 
-  // ... (keep fetch logic same)
+  useEffect(() => {
+    const fetchArticles = async () => {
+      try {
+        setLoading(true);
+        setError(null);
+
+        console.log("Fetching articles, page:", page);
+
+        const response = await api.get("/articles", {
+          params: {
+            page,
+            per_page: perPage,
+          },
+        });
+
+        console.log("API response:", response);
+        console.log("Response data:", response.data);
+
+        // Vérifier la structure de la réponse
+        const itemsData = response.data?.items || response.data || [];
+        let totalPagesData = 1; // Par défaut 1 page
+
+        // Essayer différentes clés pour le nombre total de pages
+        if (response.data?.totalPages !== undefined) {
+          totalPagesData = response.data.totalPages;
+        } else if (response.data?.total_pages !== undefined) {
+          totalPagesData = response.data.total_pages;
+        } else if (response.data?.pagination?.totalPages !== undefined) {
+          totalPagesData = response.data.pagination.totalPages;
+        }
+
+        console.log("Items to display:", itemsData);
+        console.log("Total pages from response:", totalPagesData);
+
+        setItems(Array.isArray(itemsData) ? itemsData : []);
+        setTotalPages(Math.max(1, parseInt(totalPagesData) || 1));
+
+        // Debug: vérifier l'état
+        console.log(
+          "State after update - items:",
+          itemsData.length,
+          "totalPages:",
+          totalPagesData
+        );
+      } catch (err) {
+        console.error("Error fetching articles:", err);
+        setError(
+          err.response?.data?.error || "Erreur de chargement des articles"
+        );
+        setItems([]);
+        setTotalPages(1); // Toujours au moins 1 page
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchArticles();
+  }, [page]);
 
   const getAvatarUrl = (avatarUrl) => {
-    // ... (same as before)
+    if (!avatarUrl) return "https://via.placeholder.com/24";
+    if (!avatarUrl || avatarUrl === "") {
+      return "https://via.placeholder.com/24";
+    }
   };
 
   if (loading) {
