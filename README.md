@@ -9,12 +9,11 @@
 
 ## 📸 Screenshots / Captures d'écran
 
-> _Add your screenshots to a `docs/screenshots/` folder in the repo and update the paths below._
-> _Ajoute tes captures d'écran dans un dossier `docs/screenshots/` du repo et mets à jour les chemins ci-dessous._
+> _Add your screenshots to a `docs/screenshots/` folder in the repo and update the paths below._ > _Ajoute tes captures d'écran dans un dossier `docs/screenshots/` du repo et mets à jour les chemins ci-dessous._
 
-| Home / About | Articles | Login / Register | New Article (mobile) |
-|:---:|:---:|:---:|:---:|
-| ![About page](docs/screenshots/about.png) | ![Articles page](docs/screenshots/articles.png) | ![Login page](docs/screenshots/login.png) | ![New article mobile](docs/screenshots/new-article-mobile.png) |
+|                      Home / About                       |                            Articles                             |                   Login / Register                   |                           New Article (mobile)                            |
+| :-----------------------------------------------------: | :-------------------------------------------------------------: | :--------------------------------------------------: | :-----------------------------------------------------------------------: |
+| ![About page](./src/assets/screenshots/home%20page.PNG) | ![Articles page](./src/assets/screenshots/articles%20phone.jpg) | ![Login page](./src/assets/screenshots/register.PNG) | ![New article mobile](./src/assets/screenshots/new%20article%20phone.jpg) |
 
 ---
 
@@ -34,14 +33,14 @@ Interface React de mon portfolio personnel : une application **SPA** (Single Pag
 
 ### 🛠️ Stack technique
 
-| Catégorie          | Technologies                                      |
-|---------------------|----------------------------------------------------|
-| Framework           | [React 19](https://react.dev/) + [Vite 7](https://vitejs.dev/) |
-| Routing              | React Router v7                                    |
-| Appels HTTP          | Axios (avec intercepteurs)                          |
-| Styles               | CSS3 / Sass                                         |
-| Qualité de code      | ESLint                                              |
-| Déploiement          | [Vercel](https://vercel.com/)                       |
+| Catégorie       | Technologies                                                   |
+| --------------- | -------------------------------------------------------------- |
+| Framework       | [React 19](https://react.dev/) + [Vite 7](https://vitejs.dev/) |
+| Routing         | React Router v7                                                |
+| Appels HTTP     | Axios (avec intercepteurs)                                     |
+| Styles          | CSS3 / Sass                                                    |
+| Qualité de code | ESLint                                                         |
+| Déploiement     | [Vercel](https://vercel.com/)                                  |
 
 ### 📁 Structure du projet
 
@@ -90,12 +89,12 @@ L'application est alors accessible sur `http://localhost:5173`.
 
 ### Scripts disponibles
 
-| Commande          | Description                              |
-|--------------------|--------------------------------------------|
-| `npm run dev`       | Lance le serveur de développement Vite     |
-| `npm run build`      | Génère la version de production (`dist/`) |
-| `npm run preview`     | Prévisualise le build de production       |
-| `npm run lint`         | Analyse le code avec ESLint               |
+| Commande          | Description                               |
+| ----------------- | ----------------------------------------- |
+| `npm run dev`     | Lance le serveur de développement Vite    |
+| `npm run build`   | Génère la version de production (`dist/`) |
+| `npm run preview` | Prévisualise le build de production       |
+| `npm run lint`    | Analyse le code avec ESLint               |
 
 ### ☁️ Déploiement
 
@@ -126,14 +125,14 @@ React frontend of my personal portfolio: a **SPA** (Single Page Application) tha
 
 ### 🛠️ Tech stack
 
-| Category            | Technologies                                        |
-|----------------------|-------------------------------------------------------|
-| Framework             | [React 19](https://react.dev/) + [Vite 7](https://vitejs.dev/) |
-| Routing                | React Router v7                                      |
-| HTTP client             | Axios (with interceptors)                             |
-| Styling                  | CSS3 / Sass                                           |
-| Code quality              | ESLint                                                |
-| Deployment                 | [Vercel](https://vercel.com/)                         |
+| Category     | Technologies                                                   |
+| ------------ | -------------------------------------------------------------- |
+| Framework    | [React 19](https://react.dev/) + [Vite 7](https://vitejs.dev/) |
+| Routing      | React Router v7                                                |
+| HTTP client  | Axios (with interceptors)                                      |
+| Styling      | CSS3 / Sass                                                    |
+| Code quality | ESLint                                                         |
+| Deployment   | [Vercel](https://vercel.com/)                                  |
 
 ### 📁 Project structure
 
@@ -182,12 +181,12 @@ The app is then available at `http://localhost:5173`.
 
 ### Available scripts
 
-| Command             | Description                              |
-|-----------------------|--------------------------------------------|
-| `npm run dev`          | Starts the Vite dev server                 |
-| `npm run build`         | Builds the production bundle (`dist/`)    |
-| `npm run preview`        | Previews the production build             |
-| `npm run lint`            | Lints the code with ESLint                |
+| Command           | Description                            |
+| ----------------- | -------------------------------------- |
+| `npm run dev`     | Starts the Vite dev server             |
+| `npm run build`   | Builds the production bundle (`dist/`) |
+| `npm run preview` | Previews the production build          |
+| `npm run lint`    | Lints the code with ESLint             |
 
 ### ☁️ Deployment
 
